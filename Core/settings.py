@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,15 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
+
+    #third party apps
+    "rest_framework_simplejwt",
+
     #installed apps
     "api",
     "Ballots",
-    "MyUsers",
-
+    "accounts.apps.MyusersConfig",
 ]
 
-AUTH_USER_MODEL="MyUSers.User"
+AUTH_USER_MODEL="accounts.User"
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -109,7 +114,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+REST_FRAMEWORK = {
+   
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    )
+   
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -129,3 +142,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+SIMPLE_JWT={
+    "AUTH_HEADER_TYPES":["Bearer"],
+    "ACCESS_TOKEN_LIFETIME":datetime.timedelta(minutes=5),
+     "ACCESS_TOKEN_LIFETIME":datetime.timedelta(minutes=30)
+}
