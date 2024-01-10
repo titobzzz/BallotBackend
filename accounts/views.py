@@ -10,4 +10,5 @@ from .serializer import *
 
 class RegistrationViewSet(viewsets.ModelViewSet):
     queryset = User
-    serializer_class = [UserRegistrationSerializer]
+    serializer_class = UserRegistrationSerializer
+    permission_classes =[]
