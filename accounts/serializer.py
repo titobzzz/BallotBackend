@@ -18,19 +18,19 @@ class UserRegistrationSerializer(ModelSerializer):
             "avatar"
         ]
 
-        def create(self, validated_data):
-            """
-            Create and return a new user instance, properly handling the password.
-            """
-            user = User.objects.create_user(
-                email=validated_data["email"],
-                username=validated_data["username"],
-                password=validated_data["password"]
-            )
-            print("serializable")
-            return user
-        
+    def create(self, validated_data):
+        """
+        Create and return a new user instance, properly handling the password.
+        """
+        user = User.objects.create_user(
+            email=validated_data["email"],
+            username=validated_data["username"],
+            password=validated_data["password"]
+        )
+        print("serializable")
+        return user
+
 class UserSerializer(ModelSerializer):
-     class Meta:
+    class Meta:
         model= User
         fields="__all__"

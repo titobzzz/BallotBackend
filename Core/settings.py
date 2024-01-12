@@ -121,7 +121,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     )
-   
 }
 
 # Internationalization
@@ -147,5 +146,5 @@ STATIC_URL = '/static/'
 SIMPLE_JWT={
     "AUTH_HEADER_TYPES":["Bearer"],
     "ACCESS_TOKEN_LIFETIME":datetime.timedelta(minutes=5),
-     "ACCESS_TOKEN_LIFETIME":datetime.timedelta(minutes=30)
+    "ACCESS_TOKEN_LIFETIME":datetime.timedelta(minutes=30)
 }
