@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Ballots, Comment
+from .models import *
 
 
 class BallotSerializer(serializers.ModelSerializer):
@@ -11,14 +11,24 @@ class BallotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ballots
-        fields="__all__"
-        
+        fields="__all__"        
 
 
 
 class CommentSerializer(serializers.ModelSerializer):
-
     
     class Meta:
         model = Comment
         fields="__all__"
+
+class PollSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Poll
+        fields = "__all__"
+
+class TopicSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Topics
+        fields = "__all__"
