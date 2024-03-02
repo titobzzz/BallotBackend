@@ -3,3 +3,6 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
 django-cors-headers
 pillow
+dotenv
+gunicorn
+dj-database-url

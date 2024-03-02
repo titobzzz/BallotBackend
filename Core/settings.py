@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import datetime
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,12 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret! 
-SECRET_KEY = 'y94p87625by1=s5g0fs7ri+kwi!^f-*s#v$h@c=2dtxv@fg1%s'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+if DEBUG == True: 
+    ALLOWED_HOSTS = ["*"]
+    SECRET_KEY = 'y94p87625by1=s5g0fs7ri+kwi!^f-*s#v$h@c=2dtxv@fg1%s'
+else:
+    DEBUG = os.environ.get('DEBUG')
+    # print(DEBUG)
+    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # Application definition
@@ -88,12 +99,16 @@ WSGI_APPLICATION = 'Core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+if DEBUG == True:
+   DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+ }
+else:
+    database_url = os.environ.get("DATABASE_URL")
+    DATABASES = {'default': dj_database_url.parse(database_url)}
 
 
 
