@@ -11,7 +11,7 @@ from . import views
 
 
 urlpatterns=[
-    path('',views.RegistrationViewSet.as_view({"post":"create","get":"list"}),name="registration"),
+    path('',views.RegistrationViewSet.as_view({"post":"create"}),name="registration"),
     path('auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh')    
