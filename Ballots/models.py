@@ -28,7 +28,7 @@ class Ballots(models.Model):
     class for each ballot Posts 
     '''
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    tag = models.ManyToManyField(Topics, null=True)
+    tag = models.ManyToManyField(Topics)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     images= models.ImageField(upload_to="Ballots/ballot_pictures",blank=True, null=True)
     text_content = models.TextField(max_length=500, null=True, blank=True)
@@ -48,7 +48,7 @@ class Comment(models.Model):
     content = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated= models.DateTimeField(auto_now=True) 
-    tag = models.ManyToManyField(Topics, null=True)
+    tag = models.ManyToManyField(Topics)
 
 
 class Poll(models.Model):
