@@ -34,9 +34,7 @@ DEBUG = os.environ.get('DEBUG')
 if DEBUG == True: 
     ALLOWED_HOSTS = ["*"]
     SECRET_KEY = 'y94p87625by1=s5g0fs7ri+kwi!^f-*s#v$h@c=2dtxv@fg1%s'
-else:
-   
-    # print(DEBUG)
+else:   
     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
@@ -54,6 +52,7 @@ INSTALLED_APPS = [
 
     #third party apps
     "rest_framework_simplejwt",
+    "rest_framework_swagger",
 
     #installed apps
     "api",
@@ -80,7 +79,7 @@ ROOT_URLCONF = 'Core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,11 +100,11 @@ WSGI_APPLICATION = 'Core.wsgi.application'
 
 if DEBUG == True:
    DATABASES = {
-        'default': {
+         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
- }
+    }
 else:
     database_url = os.environ.get("DATABASE_URL")
     DATABASES = {'default': dj_database_url.parse(database_url)}

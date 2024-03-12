@@ -11,8 +11,11 @@ from . import views
 
 
 urlpatterns=[
-    path('',views.RegistrationViewSet.as_view({"post":"create"}),name="registration"),
+    path('',views.UserViewSet.as_view({"post":"create"}),name="registration"),
     path('auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh')    
+    path('auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('users/',views.UserViewSet.as_view({"get":"list"}),name="list_user"),
+    path('user/<str:pk>/',views.UserViewSet.as_view({"get":"retrieve"}),name="retriveuser"),
+
 ]
